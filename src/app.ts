@@ -6,7 +6,6 @@ import compression from 'compression';
 import cors from 'cors';
 import passport from 'passport';
 import httpStatus from 'http-status';
-import path from "path"
 import config from './config/config';
 import { morgan } from './modules/logger';
 import { jwtStrategy } from './modules/auth';
@@ -20,7 +19,7 @@ if (config.env !== 'test') {
   app.use(morgan.errorHandler);
 }
 
-app.use(express.static(path.join(__dirname, "./build")))
+app.use(express.static('./build'));
 
 // set security HTTP headers
 app.use(helmet());
@@ -48,9 +47,9 @@ passport.use('jwt', jwtStrategy);
 
 app.use('/api', routes);
 
-app.use("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "./build/index.html"))
-})
+app.use('*', (_, res) => {
+  res.sendFile('./build/index.html');
+});
 
 // send back a 404 error for any unknown api request
 app.use((_req, _res, next) => {
