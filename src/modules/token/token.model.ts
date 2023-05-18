@@ -8,29 +8,29 @@ const tokenSchema = new mongoose.Schema<ITokenDoc, ITokenModel>(
     token: {
       type: String,
       required: true,
-      index: true,
+      index: true
     },
     user: {
       type: String,
       ref: 'User',
-      required: true,
+      required: true
     },
     type: {
       type: String,
-      enum: [tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
-      required: true,
+      enum: [tokenTypes.ACCESS, tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
+      required: true
     },
     expires: {
       type: Date,
-      required: true,
+      required: true
     },
     blacklisted: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
